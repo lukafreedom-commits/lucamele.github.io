@@ -10,6 +10,7 @@ Questo Project Work ha l’obiettivo di realizzare una piccola architettura sist
 - Monitoraggio attivo dei log
 - Sistema di alert via Amazon SNS
 - Rilevazione e blocco di tentativi di brute-force tramite Fail2ban
+  
 Il risultato finale è un ambiente funzionante, testato e sicuro, con processi automatici di notifica e backup.
 
 ---
