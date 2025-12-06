@@ -149,22 +149,31 @@ Variabile soglia:
 ```ini
 THRESHOLD=5
 ```
-
 Avvio script:
+```bash
 ./monitor_log.sh
-## 6. Protezione da brute-force con Fail2ban
-### 6.1 Installazione
-sudo apt install fail2ban -y
-### 6.2 Filtro personalizzato
+```
 
+## 6. Protezione da brute-force con Fail2ban
+
+### 6.1 Installazione
+```bash
+sudo apt install fail2ban -y
+```
+
+### 6.2 Filtro personalizzato
 File:
 /etc/fail2ban/filter.d/nginx-login.local.conf
+```ini
 [Definition]
 failregex = ^<HOST> - - .*"(POST|GET) /login_test\.php.*" 200
+```
+
 ### 6.3 Jail personalizzato
 
 File:
 /etc/fail2ban/jail.d/nginx-login.local
+```ini
 [nginx-login]
 enabled = true
 port = http,https
@@ -174,26 +183,36 @@ bantime = 60
 findtime = 60
 maxretry = 3
 action = sns[name=login-test]
+```
+
 ### 6.4 Test Fail2ban
+```bash
 sudo fail2ban-client status nginx-login
+```
+
 ## 7. Test dell’infrastruttura
-✔️ Test login
 
-tentativi validi
+### Test login
 
-tentativi con password errata
+- tentativi validi
+- tentativi con password errata
+- verifica dei log
 
-verifica dei log
-
-Test brute-force
+### Test brute-force
+```bash
 ./brute.sh
-Test Fail2ban
-sudo fail2ban-client status nginx-login
-Test SNS
+```
 
+### Test Fail2ban
+```bash
+sudo fail2ban-client status nginx-login
+```
+
+### Test SNS
 Controllare la ricezione dell’email di alert.
 
 ## 8. Struttura del progetto
+```pgsql
 /var/www/sito/
   ├── index.html
   ├── login.php
@@ -205,14 +224,13 @@ monitor_log.sh
 
 /etc/fail2ban/filter.d/nginx-login.local.conf
 /etc/fail2ban/jail.d/nginx-login.local
+```
 
 ## 9. Note finali
 
-Tutti i test sono stati eseguiti su un'istanza EC2 AWS.
-
-La soluzione è estensibile con HTTPS, metriche CloudWatch e WAF per maggiore sicurezza.
-
-Il progetto mostra competenze su networking, sicurezza, automazione Bash, servizi AWS e gestione dei log.
+- Tutti i test sono stati eseguiti su un'istanza EC2 AWS.
+- La soluzione è estensibile con HTTPS, metriche CloudWatch e WAF per maggiore sicurezza.
+- Il progetto mostra competenze su networking, sicurezza, automazione Bash, servizi AWS e gestione dei log.
 
 
 
