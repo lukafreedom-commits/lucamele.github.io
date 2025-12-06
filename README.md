@@ -95,7 +95,10 @@ VALUES ('admin', PASSWORD('password123'));
 ```
 
 ### 3.3 Configurazione Nginx per PHP
-Modificare /etc/nginx/sites-available/default:
+```bash
+sudo nano /etc/nginx/sites-available/sito
+```
+Impostare:
 ```nginx
 location ~ \.php$ {
     include snippets/fastcgi-php.conf;
@@ -147,6 +150,19 @@ Aggiungere:
 
 ## 5. Monitoraggio dei log + Alert SNS
 
+### 5.1 Creazione topic SNS
+```bash
+aws sns create-topic --name login-alerts
+```
+
+### 5.2 Iscrizione email
+```bash
+aws sns subscribe \
+--topic-arn arn:aws:sns:eu-west-1:xxxx:login-alerts \
+--protocol email \
+--notification-endpoint tua@email.it
+```
+
 Lo script monitor_log.sh analizza in tempo reale:
 
 - /var/log/nginx/access.log
@@ -172,7 +188,10 @@ sudo apt install fail2ban -y
 
 ### 6.2 Filtro personalizzato
 File:
+```pgsql
 /etc/fail2ban/filter.d/nginx-login.local.conf
+```
+Esempio:
 ```ini
 [Definition]
 failregex = ^<HOST> - - .*"(POST|GET) /login_test\.php.*" 200
@@ -181,7 +200,9 @@ failregex = ^<HOST> - - .*"(POST|GET) /login_test\.php.*" 200
 ### 6.3 Jail personalizzato
 
 File:
+```pgsql
 /etc/fail2ban/jail.d/nginx-login.local
+```
 ```ini
 [nginx-login]
 enabled = true
@@ -239,7 +260,3 @@ monitor_log.sh
 
 - Tutti i test sono stati eseguiti su un'istanza EC2 AWS.
 - La soluzione è estensibile con HTTPS, metriche CloudWatch e WAF per maggiore sicurezza.
-- Il progetto mostra competenze su networking, sicurezza, automazione Bash, servizi AWS e gestione dei log.
-
-
-
