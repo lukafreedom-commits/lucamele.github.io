@@ -3,7 +3,14 @@
 **Data:** Dicembre 2025  
 
 ## Descrizione del progetto
-Questo progetto realizza una piccola architettura web basata su Ubuntu, con Nginx come web server, backend PHP, database MariaDB, sistema di backup automatico su S3, monitoraggio dei log e protezione da attacchi brute-force tramite Fail2ban con invio di notifiche via Amazon SNS.
+Questo Project Work ha l’obiettivo di realizzare una piccola architettura sistemistica basata su un server Ubuntu con Nginx, dotata di:
+- Pubblicazione di una pagina web statica tramite GitHub → Nginx
+- Backend PHP con login e database MariaDB
+- Sistema di backup automatico su AWS S3
+- Monitoraggio attivo dei log
+- Sistema di alert via Amazon SNS
+- Rilevazione e blocco di tentativi di brute-force tramite Fail2ban
+Il risultato finale è un ambiente funzionante, testato e sicuro, con processi automatici di notifica e backup.
 
 ---
 
