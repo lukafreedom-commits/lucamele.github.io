@@ -2,6 +2,7 @@
 **Autore:** Luca Mele  
 **Data:** Dicembre 2025  
 
+## Descrizione del progetto
 Questo progetto realizza una piccola architettura web basata su Ubuntu, con Nginx come web server, backend PHP, database MariaDB, sistema di backup automatico su S3, monitoraggio dei log e protezione da attacchi brute-force tramite Fail2ban con invio di notifiche via Amazon SNS.
 
 ---
