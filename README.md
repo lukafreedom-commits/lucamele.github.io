@@ -131,23 +131,25 @@ Esempio di pianificazione via cron:
 ```bash
 crontab -e
 ```
-
 Aggiungere:
+```ruby
 0 * * * * /home/ubuntu/backup_S3.sh >> /home/ubuntu/backup_cron.log 2>&1
+```
+
 ## 5. Monitoraggio dei log + Alert SNS
 
 Lo script monitor_log.sh analizza in tempo reale:
 
-/var/log/nginx/access.log
-
-intercetta tentativi falliti
-
-incrementa un contatore per IP
-
-invia una notifica SNS al superamento della soglia
+- /var/log/nginx/access.log
+- intercetta tentativi falliti
+- incrementa un contatore per IP
+- invia una notifica SNS al superamento della soglia
 
 Variabile soglia:
+```ini
 THRESHOLD=5
+```
+
 Avvio script:
 ./monitor_log.sh
 ## 6. Protezione da brute-force con Fail2ban
