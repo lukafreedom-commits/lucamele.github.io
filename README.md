@@ -12,6 +12,7 @@ Questo Project Work ha l’obiettivo di realizzare una piccola architettura sist
 - Rilevazione e blocco di tentativi di brute-force tramite Fail2ban
   
 Il risultato finale è un ambiente funzionante, testato e sicuro, con processi automatici di notifica e backup.
+![Schema architettura](Project Work Schema.jpg)
 
 ---
 
