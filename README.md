@@ -254,9 +254,11 @@ monitor_log.sh
 
 /etc/fail2ban/filter.d/nginx-login.local.conf
 /etc/fail2ban/jail.d/nginx-login.local
+/etc/fail2ban/action.d/sns.conf
 ```
 
 ## 9. Note finali
 
 - Tutti i test sono stati eseguiti su un'istanza EC2 AWS.
+- Per evitare blocchi AWS, è stato utilizzato login_test.php come endpoint di test.
 - La soluzione è estensibile con HTTPS, metriche CloudWatch e WAF per maggiore sicurezza.
