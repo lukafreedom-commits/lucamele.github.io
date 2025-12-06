@@ -105,25 +105,33 @@ sudo systemctl reload nginx
 ```
 
 ## 4. Backup automatico su S3
+
 ### 4.1 Installazione AWS CLI
+```bash
 sudo apt install unzip -y
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
+```
+
 ### 4.2 Configurazione credenziali
+```bash
 aws configure
+```
+
 ### 4.3 Script backup (backup_S3.sh)
 
 Lo script:
 
-comprime /var/www/sito
-
-carica l’archivio nel bucket S3
-
-registra il log dell’operazione
+- comprime /var/www/sito
+- carica l’archivio nel bucket S3
+- registra il log dell’operazione
 
 Esempio di pianificazione via cron:
+```bash
 crontab -e
+```
+
 Aggiungere:
 0 * * * * /home/ubuntu/backup_S3.sh >> /home/ubuntu/backup_cron.log 2>&1
 ## 5. Monitoraggio dei log + Alert SNS
