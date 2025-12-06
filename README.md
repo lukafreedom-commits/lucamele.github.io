@@ -1,6 +1,6 @@
 # Project Work – Architettura Web Sicura con Backup, Monitoraggio e Notifiche SNS
 **Autore:** Luca Mele  
-**Anno:** 2025  
+**Data:** Dicembre 2025  
 
 Questo progetto realizza una piccola architettura web basata su Ubuntu, con Nginx come web server, backend PHP, database MariaDB, sistema di backup automatico su S3, monitoraggio dei log e protezione da attacchi brute-force tramite Fail2ban con invio di notifiche via Amazon SNS.
 
@@ -32,26 +32,46 @@ Questo progetto realizza una piccola architettura web basata su Ubuntu, con Ngin
 sudo apt update && sudo apt upgrade -y
 ```
 ### 2.2 Installazione di Nginx
+```bash
 sudo apt install nginx -y
-Verifica servizio:
-systemctl status nginx
-### 2.3 Pubblicazione della pagina HTML da GitHub
+```
 
+Verifica servizio:
+```bash
+systemctl status nginx
+```
+
+### 2.3 Pubblicazione della pagina HTML da GitHub
 Scaricare il sito statico:
+```bash
 sudo git clone https://github.com/<username>/<repo>.git /var/www/sito
+```
 Impostare permessi:
+```bash
 sudo chown -R www-data:www-data /var/www/sito
 sudo chmod -R 755 /var/www/sito
+```
 Configurazione base in /etc/nginx/sites-available/default:
+```pgsql
 root /var/www/sito;
 index index.html index.htm;
+```
+
 ## 3. Backend PHP + Database MariaDB
+
 ### 3.1 Installazione PHP
+```bash
 sudo apt install php php-fpm php-mysql -y
+```
+
 ### 3.2 Installazione MariaDB
+```bash
 sudo apt install mariadb-server -y
 sudo mysql_secure_installation
+```
+
 Creazione database:
+```sql
 CREATE DATABASE login_test;
 USE login_test;
 
@@ -63,16 +83,27 @@ CREATE TABLE users (
 
 INSERT INTO users(username, password)
 VALUES ('admin', PASSWORD('password123'));
+```
+
 ### 3.3 Configurazione Nginx per PHP
 Modificare /etc/nginx/sites-available/default:
+```nginx
 location ~ \.php$ {
     include snippets/fastcgi-php.conf;
     fastcgi_pass unix:/run/php/php8.3-fpm.sock;
 }
+```
+
 Test configurazione:
+```bash
 sudo nginx -t
+```
+
 Ricaricare:
+```bash
 sudo systemctl reload nginx
+```
+
 ## 4. Backup automatico su S3
 ### 4.1 Installazione AWS CLI
 sudo apt install unzip -y
